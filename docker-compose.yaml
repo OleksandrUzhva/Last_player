@@ -1,0 +1,29 @@
+services:
+  database:
+    image: "postgres:16"
+    container_name: last_player_database
+    env_file: ".env"
+    ports:
+      - "5432:5432" 
+    volumes:
+      - "pg_data:/var/lib/postgresql/data"
+
+  api: 
+    build: 
+      context: .
+      dockerfile: Dockerfile
+    image: last_player
+    container_name: last_player_api
+    ports:
+      - "8000:8000"
+    env_file: ".env"
+    depends_on:
+      - database
+    volumes:
+      - ./:/app/
+
+
+
+
+volumes:
+  pg_data: {}
