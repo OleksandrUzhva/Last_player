@@ -30,15 +30,15 @@ DJANGO_APPS = [
 
 LOCAL_APPS = [
     "users",
+    "games",
 ]
 
-# THIRD_PARTY_APPS = [
-#     "rest_framework",
-#     "rest_framework_simplejwt",
-#     "drf_yasg",
-# ]
+THIRD_PARTY_APPS = [
+    "rest_framework",
+    "rest_framework_simplejwt",
+]
 
-INSTALLED_APPS = DJANGO_APPS + LOCAL_APPS 
+INSTALLED_APPS = DJANGO_APPS + LOCAL_APPS + THIRD_PARTY_APPS
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -126,3 +126,5 @@ STATIC_URL = 'static/'
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+AUTH_USER_MODEL = "users.User"

@@ -1,9 +1,10 @@
 from django.db import models
-# from django.contrib.auth.models import AbstractBaseUser, PermissionsMixin
+from django.contrib.auth.models import AbstractBaseUser, PermissionsMixin
 from django.utils import timezone
 from .enums import Positions
+from .manager import UserManager
 
-class User(models.Model):
+class User(AbstractBaseUser, PermissionsMixin):
     login = models.CharField(max_length=30, unique=True)
     email = models.CharField(max_length=30, unique=True)
 
@@ -22,4 +23,11 @@ class User(models.Model):
     positions = models.CharField(
         max_length=20, default=Positions.SUPPORT, choices=Positions.choices()
     )
+
+    objects = UserManager()
+
+    EMAIL_FIELD = "email"
+    USERNAME_FIELD = "email"
+    REQUIRED_FIELDS = []
+
 
